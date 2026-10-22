@@ -1,0 +1,81 @@
+{
+  "tool": "WebGuard",
+  "version": "1.1",
+  "scanned_at": "2026-10-22T12:21:26.489374+00:00",
+  "target": "https://example.com",
+  "http_status": 200,
+  "redirect_location": null,
+  "content_type": "text/html; charset=utf-8",
+  "summary": {
+    "total_checks": 6,
+    "high": 0,
+    "medium": 0,
+    "low": 3,
+    "info": 3,
+    "review_required": 5
+  },
+  "findings": [
+    {
+      "id": "WG-002",
+      "title": "Strict-Transport-Security was not observed",
+      "severity": "LOW",
+      "status": "REVIEW",
+      "evidence": "Strict-Transport-Security was absent from the received response.",
+      "impact": "Helps browsers enforce HTTPS on future connections.",
+      "remediation": "For HTTPS sites, evaluate enabling HSTS with an appropriate max-age after confirming all relevant subdomains support HTTPS."
+    },
+    {
+      "id": "WG-003",
+      "title": "Content-Security-Policy was not observed",
+      "severity": "LOW",
+      "status": "REVIEW",
+      "evidence": "Content-Security-Policy was absent from the received response.",
+      "impact": "Restricts permitted sources of scripts and other content.",
+      "remediation": "Design and test a CSP suited to the application. Start with Report-Only where appropriate before enforcing it."
+    },
+    {
+      "id": "WG-004",
+      "title": "X-Content-Type-Options was not observed",
+      "severity": "LOW",
+      "status": "REVIEW",
+      "evidence": "X-Content-Type-Options was absent from the received response.",
+      "impact": "Helps prevent MIME-type sniffing when set to nosniff.",
+      "remediation": "Consider sending X-Content-Type-Options: nosniff."
+    },
+    {
+      "id": "WG-005",
+      "title": "Referrer-Policy was not observed",
+      "severity": "INFO",
+      "status": "REVIEW",
+      "evidence": "Referrer-Policy was absent from the received response.",
+      "impact": "Controls referrer information sent by the browser.",
+      "remediation": "Choose a policy appropriate for the application's privacy requirements, such as strict-origin-when-cross-origin."
+    },
+    {
+      "id": "WG-006",
+      "title": "Permissions-Policy was not observed",
+      "severity": "INFO",
+      "status": "REVIEW",
+      "evidence": "Permissions-Policy was absent from the received response.",
+      "impact": "Controls access to selected browser features.",
+      "remediation": "Consider restricting browser features the application does not need. Configure directives for the actual use case."
+    },
+    {
+      "id": "WG-007",
+      "title": "No cookies set in this response",
+      "severity": "INFO",
+      "status": "OBSERVED",
+      "evidence": "No Set-Cookie header was observed in this response.",
+      "impact": "This response did not set a cookie. Other routes or responses may behave differently.",
+      "remediation": "If the application uses session cookies, review their flags on the responses that issue them."
+    }
+  ],
+  "limitations": [
+    "This is a basic HTTP configuration review, not a penetration test.",
+    "Missing headers are observations, not proof of exploitable flaws.",
+    "Severity is an initial review priority, not a validated risk rating.",
+    "Only one GET request is made; redirects are not followed.",
+    "Only the supplied URL and response are assessed.",
+    "Cookie checks are heuristic and require application context."
+  ]
+}
