@@ -109,3 +109,9 @@ Only assess systems you own or have explicit authorization to test. The automate
 ## Disclaimer
 
 WebGuard is an educational portfolio project intended for authorized security assessment and defensive learning.
+## Automated Tests
+
+Run the test suite from the project root:
+
+```bash
+python -m unittest discover -s tests -v
